@@ -11,6 +11,10 @@ from ..service import Service, get_service
 from . import router
 
 
+class GetShanyraksRequest(AppModel):
+    id: str
+
+
 class GetShanyrakResponse(AppModel):
     id: Any = Field(alias="_id")
     type: str
@@ -20,10 +24,6 @@ class GetShanyrakResponse(AppModel):
     area: int
     rooms_count: int
     description: str
-
-
-class GetShanyraksRequest(AppModel):
-    id: str
 
 
 @router.get("/{id:str}", response_model=GetShanyrakResponse)

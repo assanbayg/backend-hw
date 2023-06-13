@@ -1,7 +1,6 @@
-from datetime import datetime
-
 from bson.objectid import ObjectId
 from pymongo.database import Database
+from pymongo.results import UpdateResult
 
 
 class ShanyrakRepository:
@@ -16,8 +15,6 @@ class ShanyrakRepository:
             "address": input["address"],
             "area": input["area"],
             "rooms_count": input["rooms_count"],
-            "description": input["description"],
-            "created_at": datetime.utcnow(),
         }
 
         result = self.database["shanyraks"].insert_one(payload)
@@ -25,9 +22,16 @@ class ShanyrakRepository:
         return created_shanyrak_id
 
     def get_shanyrak_by_id(self, id: str) -> dict:
-        shanyrak = self.database["shanyraks"].find_one(
-            {
-                "_id": ObjectId(id),
-            }
-        )
+        shanyrak = self.database["shanyraks"].find_one({"_id": ObjectId(id)})
         return shanyrak
+
+    def update_shanyrak(
+        self,
+        id: str,
+        user_id: str,
+        data: dict,
+    ) -> UpdateResult:
+        return self.database["shanyraks"].update_one(
+            filter={"_id": ObjectId(id), "user_id": ObjectId(user_id)},
+            update={"$set": data},
+        )

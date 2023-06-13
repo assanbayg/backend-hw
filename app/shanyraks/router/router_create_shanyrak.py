@@ -16,7 +16,6 @@ class CreateShanyrakRequest(AppModel):
     address: str
     area: int
     rooms_count: int
-    description: str
 
 
 class CreateShanyrakResponse(AppModel):
