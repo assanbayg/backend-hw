@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Response
 from pydantic import Field, BaseModel
 
 from app.utils import AppModel
@@ -41,8 +41,4 @@ def update_user_by_id(
         user_id, input.dict(exclude_unset=True)
     )
 
-    return UpdateUserResponse(
-        phone=updated_user.phone,
-        name=updated_user.name,
-        city=updated_user.city,
-    )
+    return Response(status_code=200)
