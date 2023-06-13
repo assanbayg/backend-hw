@@ -3,7 +3,6 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.auth.router import router as auth_router
 from app.config import client, env, fastapi_config
-from app.tweets.router import router as tweets_router
 from app.shanyraks.router import router as shanyraks_router
 
 app = FastAPI(**fastapi_config)

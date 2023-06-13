@@ -24,20 +24,19 @@ class CreateShanyrakResponse(AppModel):
 
 @router.post("/")
 def create_shanyrak(
-    input: CreateShanyrakRequest,
+    data: CreateShanyrakRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> CreateShanyrakResponse:
-    user_id = jwt_data.user_id
     created_shanyrak_id = svc.repository.create_shanyrak(
         {
-            "user_id": user_id,
-            "type": input.type,
-            "price": input.price,
-            "address": input.address,
-            "area": input.area,
-            "description": input.description,
-            "rooms_count": input.rooms_count,
+            "user_id": jwt_data.user_id,
+            "type": data.type,
+            "price": data.price,
+            "address": data.address,
+            "area": data.area,
+            "description": data.description,
+            "rooms_count": data.rooms_count,
         }
     )
 
