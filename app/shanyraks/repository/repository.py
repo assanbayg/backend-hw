@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 from bson.objectid import ObjectId
 from pymongo.database import Database
@@ -25,14 +24,10 @@ class ShanyrakRepository:
         created_shanyrak_id = str(result.inserted_id)
         return created_shanyrak_id
 
-    def get_shanyrak_by_user_id(self, user_id: str) -> List[dict]:
-        shanyraks = self.database["shanyraks"].find(
+    def get_shanyrak_by_id(self, id: str) -> dict:
+        shanyrak = self.database["shanyraks"].find_one(
             {
-                "user_id": ObjectId(user_id),
+                "_id": ObjectId(id),
             }
         )
-        result = []
-        for shanyrak in shanyraks:
-            result.append(shanyrak)
-
-        return result
+        return shanyrak

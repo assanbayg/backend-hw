@@ -1,7 +1,5 @@
-from typing import Any, Optional
-
-from fastapi import Depends, HTTPException, status, Response
-from pydantic import Field, BaseModel
+from fastapi import Depends, Response
+from pydantic import BaseModel
 
 from app.utils import AppModel
 
@@ -23,13 +21,7 @@ class UpdateUserResponse(AppModel):
     city: str
 
 
-@router.patch(
-    "/users/me",
-    responses={
-        status.HTTP_200_OK: {"model": UpdateUserResponse},
-        status.HTTP_404_NOT_FOUND: {"description": "User not found"},
-    },
-)
+@router.patch("/users/me")
 def update_user_by_id(
     input: UpdateUserRequest,
     jwt_data: JWTData = Depends(parse_jwt_user_data),
@@ -37,8 +29,6 @@ def update_user_by_id(
 ) -> dict[str, str]:
     user_id = jwt_data.user_id
 
-    updated_user = svc.repository.update_user_by_id(
-        user_id, input.dict(exclude_unset=True)
-    )
+    svc.repository.update_user_by_id(user_id, input.dict())
 
     return Response(status_code=200)

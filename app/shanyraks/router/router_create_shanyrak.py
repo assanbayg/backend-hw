@@ -1,4 +1,4 @@
-from fastapi import Depends, Response
+from fastapi import Depends
 from typing import Optional
 
 from app.auth.adapters.jwt_service import JWTData
@@ -41,4 +41,5 @@ def create_shanyrak(
             "rooms_count": input.rooms_count,
         }
     )
+
     return CreateShanyrakResponse(id=created_shanyrak_id)
