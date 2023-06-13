@@ -38,3 +38,8 @@ class ShanyrakRepository:
                 }
             },
         )
+
+    def delete_shanyrak(self, id: str, user_id: str):
+        self.database["shanyraks"].delete_one(
+            filter={"_id": ObjectId(id), "user_id": ObjectId(user_id)}
+        )
