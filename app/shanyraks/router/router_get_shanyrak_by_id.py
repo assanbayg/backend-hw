@@ -2,6 +2,7 @@ from typing import Any
 
 from fastapi import Depends, HTTPException, status
 from pydantic import Field
+from typing import List
 
 from app.auth.adapters.jwt_service import JWTData
 from app.auth.router.dependencies import parse_jwt_user_data
@@ -19,6 +20,7 @@ class GetShanyrakResponse(AppModel):
     address: str = ""
     area: int = 0
     rooms_count: int = 0  # REMINDER: GET requeres data ((( it took me 1 hour to fix
+    media: List = []
 
 
 @router.get("/{id:str}", response_model=GetShanyrakResponse)

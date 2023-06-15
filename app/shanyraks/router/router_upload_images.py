@@ -16,4 +16,4 @@ def upload_files(
         url = svc.s3_service.upload_file(file=file.file, filename=file.filename)
         result.append(url)
 
-    return status.HTTP_200_OK
+    return result
