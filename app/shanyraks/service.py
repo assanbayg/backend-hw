@@ -20,7 +20,5 @@ class Service:
 
 
 def get_service():
-    repository = ShanyrakRepository(database)
-
-    svc = Service(repository)
+    svc = Service()
     return svc
