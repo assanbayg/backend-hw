@@ -2,6 +2,8 @@ import os
 import requests
 from dotenv import load_dotenv
 
+from fastapi import HTTPException
+
 
 class HereService:
     def __init__(self):
@@ -16,4 +18,4 @@ class HereService:
         if "items" in json and len(json["items"]) > 0:
             return json["items"][0]["position"]
         else:
-            return {}
+            raise HTTPException(status_code=404, detail="Address not found")
