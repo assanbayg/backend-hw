@@ -29,10 +29,6 @@ def create_shanyrak(
     svc: Service = Depends(get_service),
 ) -> CreateShanyrakResponse:
     coordinates = svc.here_service.get_coordinates(data.address)
-    location = {
-        "latitude": coordinates["lat"],
-        "longitude": coordinates["lng"],
-    }
     created_shanyrak_id = svc.repository.create_shanyrak(
         {
             "user_id": jwt_data.user_id,
@@ -42,10 +38,9 @@ def create_shanyrak(
             "area": data.area,
             "description": data.description,
             "rooms_count": data.rooms_count,
-            "location": location,
+            "location": coordinates,
         }
     )
-
     return CreateShanyrakResponse(id=created_shanyrak_id)
 
 

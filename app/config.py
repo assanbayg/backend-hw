@@ -15,10 +15,12 @@ class Config(BaseSettings):
     MONGOPASSWORD: str = "password"
     MONGODATABASE: str = "fastapi"
     MONGO_URL: str = ""
+    HERE_API_KEY: str = ""
 
 
 # environmental variables
 env = Config()
+print(env)
 
 # FastAPI configurations
 fastapi_config: dict[str, Any] = {

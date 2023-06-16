@@ -15,6 +15,7 @@ class ShanyrakRepository:
             "area": data["area"],
             "rooms_count": data["rooms_count"],
             "description": data["description"],
+            "location": data["location"],
         }
 
         result = self.database["shanyraks"].insert_one(payload)
