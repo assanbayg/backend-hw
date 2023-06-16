@@ -2,8 +2,6 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
-
 
 class HereService:
     def __init__(self):
