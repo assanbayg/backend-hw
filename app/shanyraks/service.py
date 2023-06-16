@@ -8,17 +8,15 @@ from .repository.repository import ShanyrakRepository
 
 
 class Config(BaseSettings):
-    HERE_API_KEY:str
+    HERE_API_KEY: str
+
 
 class Service:
-    def __init__(
-        self,
-        repository: ShanyrakRepository,
-    ):
+    def __init__(self):
         config = Config()
-        self.repository = repository
+        self.repository = ShanyrakRepository(database)
         self.s3_service = S3Service()
-        self.here_service = HereService(config.HERE_API_KEY)
+        self.here_service = HereService()
 
 
 def get_service():

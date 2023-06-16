@@ -29,4 +29,11 @@ def get_shanyrak_by_id(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> dict[str, str]:
-    return svc.repository.get_shanyrak_by_id(id)
+    shanyrak_data = svc.repository.get_shanyrak_by_id(id)
+    if shanyrak_data:
+        return GetShanyrakResponse(**shanyrak_data)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Shanyrak not found",
+        )
