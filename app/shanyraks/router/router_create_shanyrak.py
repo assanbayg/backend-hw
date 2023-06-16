@@ -28,6 +28,8 @@ def create_shanyrak(
     jwt_data: JWTData = Depends(parse_jwt_user_data),
     svc: Service = Depends(get_service),
 ) -> CreateShanyrakResponse:
+    coordinates = svc.here_service.get_coordinates(data.address)
+    print(coordinates.items.position)
     created_shanyrak_id = svc.repository.create_shanyrak(
         {
             "user_id": jwt_data.user_id,
@@ -37,7 +39,39 @@ def create_shanyrak(
             "area": data.area,
             "description": data.description,
             "rooms_count": data.rooms_count,
+            "location": {
+                "latitude": coordinates.items.position.lat,
+                "longitude": coordinates.items.position.lng,
+            },
         }
     )
 
     return CreateShanyrakResponse(id=created_shanyrak_id)
+
+
+# {
+#     "items": [
+#         {
+#             "title": "Алматы, Қазақстан",
+#             "id": "here:cm:namedplace:23799358",
+#             "resultType": "locality",
+#             "localityType": "city",
+#             "address": {
+#                 "label": "Алматы, Қазақстан",
+#                 "countryCode": "KAZ",
+#                 "countryName": "Қазақстан",
+#                 "county": "Алматы",
+#                 "city": "Алматы",
+#                 "postalCode": "050009",
+#             },
+#             "position": {"lat": 43.25066, "lng": 76.88814},
+#             "mapView": {
+#                 "west": 76.73774,
+#                 "south": 43.03399,
+#                 "east": 77.17164,
+#                 "north": 43.40304,
+#             },
+#             "scoring": {"queryScore": 1.0, "fieldScore": {"city": 1.0}},
+#         }
+#     ]
+# }

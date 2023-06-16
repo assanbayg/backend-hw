@@ -20,7 +20,7 @@ class GetShanyrakResponse(AppModel):
     address: str = ""
     area: int = 0
     rooms_count: int = 0  # REMINDER: GET requeres data ((( it took me 1 hour to fix
-    media: List = []
+    location: dict = {}
 
 
 @router.get("/{id:str}", response_model=GetShanyrakResponse)
