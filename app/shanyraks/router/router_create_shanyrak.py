@@ -30,8 +30,8 @@ def create_shanyrak(
 ) -> CreateShanyrakResponse:
     coordinates = svc.here_service.get_coordinates(data.address)
     location = {
-        "latitude": coordinates["lat"],
-        "longitude": coordinates["lng"],
+        "latitude": coordinates.lat,
+        "longitude": coordinates.lng,
     }
     created_shanyrak_id = svc.repository.create_shanyrak(
         {
