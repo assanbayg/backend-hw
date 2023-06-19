@@ -1,5 +1,4 @@
-from fastapi import Depends, Response, UploadFile, HTTPException
-from typing import Any, List
+from fastapi import Depends, Response
 
 from app.auth.adapters.jwt_service import JWTData
 from app.auth.router.dependencies import parse_jwt_user_data

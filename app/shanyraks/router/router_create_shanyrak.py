@@ -42,31 +42,3 @@ def create_shanyrak(
         }
     )
     return CreateShanyrakResponse(id=created_shanyrak_id)
-
-
-# {
-#     "items": [
-#         {
-#             "title": "Алматы, Қазақстан",
-#             "id": "here:cm:namedplace:23799358",
-#             "resultType": "locality",
-#             "localityType": "city",
-#             "address": {
-#                 "label": "Алматы, Қазақстан",
-#                 "countryCode": "KAZ",
-#                 "countryName": "Қазақстан",
-#                 "county": "Алматы",
-#                 "city": "Алматы",
-#                 "postalCode": "050009",
-#             },
-#             "position": {"lat": 43.25066, "lng": 76.88814},
-#             "mapView": {
-#                 "west": 76.73774,
-#                 "south": 43.03399,
-#                 "east": 77.17164,
-#                 "north": 43.40304,
-#             },
-#             "scoring": {"queryScore": 1.0, "fieldScore": {"city": 1.0}},
-#         }
-#     ]
-# }
