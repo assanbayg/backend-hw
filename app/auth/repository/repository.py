@@ -10,6 +10,20 @@ class AuthRepository:
     def __init__(self, database: Database):
         self.database = database
 
+    def get_favorites(self, user_id: str):
+        user = self.database["users"].find_one({"_id": ObjectId(user_id)})
+        return user["favorites"] if "favorites" in user else []
+
+    def make_favorite(self, user_id: str, shanyrak_id: str):
+        favorites = self.get_favorites(user_id)
+        if shanyrak_id not in favorites:
+            favorites.append(shanyrak_id)
+
+        self.database["users"].update_one(
+            filter={"_id": ObjectId(user_id)},
+            update={"$set": {"favorites": favorites}},
+        )
+
     def create_user(self, user: dict):
         payload = {
             "email": user["email"],
