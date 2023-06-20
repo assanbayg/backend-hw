@@ -11,10 +11,10 @@ from . import router
 
 class UpdateShanyrakRequest(AppModel):
     type: str
-    price: int
+    price: float
     description: str
     address: str
-    area: int
+    area: float
     rooms_count: int
 
 
